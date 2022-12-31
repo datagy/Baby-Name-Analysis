@@ -12,4 +12,4 @@ def load_data():
 
 
 df = load_data()
-df['Proportion'] / df.groupby(['Year', 'Gender'])['Num'].transform('sum')
+df['Proportion'] / df.groupby(['Year', 'Gender'])['Number'].transform('sum')
