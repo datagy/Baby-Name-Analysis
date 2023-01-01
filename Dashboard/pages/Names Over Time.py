@@ -11,7 +11,7 @@ def get_top_n_names_by_year(df, year, gender, n, by='Number'):
 
 
 def plot_names_over_time(df, names, gender, view_type):
-    view_type = 'Number' if view_type == '# of Babies' else 'Proportion by Year'
+    view_type = 'Number' if view_type == '# of Babies' else 'Proportion'
     df = df[(df['Name'].isin(names)) & (df['Gender'] == gender)]
     df = df.sort_values(by='Year', ascending=True)
     fig = px.line(
