@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 from Home import df
 
@@ -57,7 +59,7 @@ def generate_metrics_card(metrics):
         )
 
 
-def name_popularity_over_time(name, gender, view_type, df=df):
+def name_popularity_over_time(name, gender, view_type, title=None, df=df):
     filtered = df[(df['Name'] == name) & (df['Gender'] == gender)]
     filtered = filtered.sort_values(by='Year', ascending=True)
 
@@ -71,7 +73,8 @@ def name_popularity_over_time(name, gender, view_type, df=df):
         labels={
             'Number': '# of children born',
             'Proportion': '% of children born'
-        }
+        },
+        title=title
     )
 
     fig.layout.yaxis.tickformat = fmt
@@ -94,10 +97,14 @@ with col2:
 metrics = get_name_metrics(df, gender, name)
 generate_metrics_card(metrics)
 
-view_type = st.radio(
-    label='Select a view:',
-    options=['# of Babies', '% of Babies'],
-    horizontal=True
-)
+# view_type = st.radio(
+#     label='Select a view:',
+#     options=['# of Babies', '% of Babies'],
+#     horizontal=True
+# )
 
-st.plotly_chart(name_popularity_over_time(name, gender, view_type))
+st.plotly_chart(name_popularity_over_time(
+    name, gender, '# of Babies', f'# of {name}s Born by Year'))
+
+st.plotly_chart(name_popularity_over_time(
+    name, gender, '% of Babies', f'% of {name}s Born by Year'))
