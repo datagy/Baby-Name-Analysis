@@ -59,8 +59,8 @@ st.header('Under construction')
 st.plotly_chart(calculate_unique_names_by_year())
 year = st.slider(
     label='Select a year:',
-    min_value=df['Year'].min(),
-    max_value=df['Year'].max(),
+    min_value=int(df['Year'].min()),
+    max_value=int(df['Year'].max()),
     value=2021
 )
 st.plotly_chart(get_unique_names_by_starting_letter(year))
